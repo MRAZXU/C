@@ -11,7 +11,7 @@ char* p = "Delphi";
 
 int i = 0;
 # 2 "comp.c" 2
-# 11 "comp.c"
+# 20 "comp.c"
 int main()
 {
     p = "Hello world!";
