@@ -1,0 +1,22 @@
+
+.PHONY : all out first second third test
+
+all out : 
+	@echo "$(MAKE)"
+	@echo "$(MAKECMDGOALS)"
+	@echo "$(MAKEFILE_LIST)"
+	
+	
+first :
+	@echo "first"
+	
+second :
+	@echo "second"
+	
+third :
+	@echo "third"
+#类似于函数调用	
+test :
+	@$(MAKE) first
+	@$(MAKE) second
+	@$(MAKE) third
