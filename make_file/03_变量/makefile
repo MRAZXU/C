@@ -1,4 +1,3 @@
-
 .PHONY : test1 test2
 
 TDelphi := Delphi Tang
