@@ -1,13 +1,22 @@
-src1 := a.cc b.cc c.cc
-obj1 := $(src1:cc=o)
 
-test1 :
-	@echo "obj1 => $(obj1)"
-	
-	
-src2 := a11b.c a22b.c a33b.c
-obj2 := $(src2:a%b.c=x%y)
+var := D.T.Software
+new := TDelphi
 
-test2 :
-	@echo "obj2 => $(obj2)"
+test : var := test-var
+%e : override new := test-new
+
+test : another
+	@echo "test :"
+	@echo "var => $(var)"
+	@echo "new => $(new)"
+	
+another :
+	@echo "another :"
+	@echo "var => $(var)"
+	@echo "new => $(new)"
+	
+rule :
+	@echo "rule :"
+	@echo "var => $(var)"
+	@echo "new => $(new)"
 	
