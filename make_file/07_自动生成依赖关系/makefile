@@ -1,12 +1,57 @@
-OBJS := func.o main.o
+.PHONY : all clean rebuild
 
-hello.out : $(OBJS)
-	@gcc -o $@ $^
-	@echo "Target File ==> $@"
+MKDIR := mkdir
+RM := rm -fr
+CC := gcc
+
+DIR_DEPS := deps
+DIR_EXES := exes
+DIR_OBJS := objs
+
+DIRS := $(DIR_DEPS) $(DIR_EXES) $(DIR_OBJS)
+
+EXE := app.out
+EXE := $(addprefix $(DIR_EXES)/, $(EXE))
+
+SRCS := $(wildcard *.c)
+OBJS := $(SRCS:.c=.o)
+OBJS := $(addprefix $(DIR_OBJS)/, $(OBJS))
+DEPS := $(SRCS:.c=.dep)
+DEPS := $(addprefix $(DIR_DEPS)/, $(DEPS))
+
+
+all : $(DIR_OBJS) $(DIR_EXES) $(EXE)
+
+ifeq ("$(MAKECMDGOALS)", "all")
+-include $(DEPS)
+endif
+
+ifeq ("$(MAKECMDGOALS)", "")
+-include $(DEPS)
+endif
+
+$(EXE) : $(OBJS)
+	$(CC) -o $@ $^
+	@echo "Success! Target => $@"
+
+$(DIR_OBJS)/%.o : %.c
+	$(CC) -o $@ -c $(filter %.c, $^)
+
+$(DIRS) :
+	$(MKDIR) $@
+
+ifeq ("$(wildcard $(DIR_DEPS))", "")
+$(DIR_DEPS)/%.dep : $(DIR_DEPS) %.c
+else
+$(DIR_DEPS)/%.dep : %.c
+endif
+	@echo "Creating $@ ..."
+	@set -e; \
+	$(CC) -MM -E $(filter %.c, $^) | sed 's,\(.*\)\.o[ :]*,objs/\1.o $@ : ,g' > $@
 	
-$(OBJS) : %.o : %.c func.h
-	@gcc -o $@ -c $<
-#自动搜索
-#$(OBJS) : %.o : %.c 
-#	@gcc -o $@ -c $^
-#头文件没有写入的话，并不会更新对应内容
+clean :
+	$(RM) $(DIRS)
+	
+rebuild :
+	@$(MAKE) clean
+	@$(MAKE) all
