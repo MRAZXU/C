@@ -1,0 +1,2 @@
+/mnt/f/C学习/github同步的学习资料/C-basic/make_file/11_打造专业的编译环境/build/module/module.o /mnt/f/C学习/github同步的学习资料/C-basic/make_file/11_打造专业的编译环境/build/module/module.dep : src/module.c inc/module.h \
+ /mnt/f/C学习/github同步的学习资料/C-basic/make_file/11_打造专业的编译环境/common/inc/func.h
