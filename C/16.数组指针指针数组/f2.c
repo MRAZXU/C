@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-//指针数组：里面全是指针数组
+//指针数组：里面全是指针的数组
 //指针数组定义：char *a[3]
 //数组指针定义：char (*p)[3]  or  typedef char Char[];Char[]*p
 #define DIM(a) (sizeof(a)/sizeof(*a))

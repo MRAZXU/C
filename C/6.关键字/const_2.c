@@ -18,8 +18,8 @@ int main()
     modify((int*)&i, 1);           // ok
     //static静态局部变量赋予了只读属性时，就不可变
     //modify((int*)&j, 2);           // error
-   //全局变量也是不能的
-   // modify((int*)&g_array[0], 4);  // error
+    //全局变量也是不能的
+    //modify((int*)&g_array[0], 4);  // error
     
     printf("i = %d\n", i);
     printf("j = %d\n", j);

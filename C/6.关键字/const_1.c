@@ -17,3 +17,9 @@ int main()
     printf("g_cc = %d\n", g_cc);//只读存储区不能修改
     return 0;
 }
+/*
+cc = 1
+cc = 3
+g_cc = 2
+[1]    80 segmentation fault  ./a.out
+*/

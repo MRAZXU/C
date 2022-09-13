@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+/*左数右边指针*/
 const char* f(const int i)
 {
     //i = 5;//error 只读性质
