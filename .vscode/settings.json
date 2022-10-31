@@ -1,3 +1,11 @@
 {
-    "makefile.extensionOutputFolder": "./.vscode"
+    "makefile.extensionOutputFolder": "./.vscode",
+    "files.associations": {
+        "stdlib.h": "c",
+        "link.h": "c",
+        "siglink.h": "c",
+        "string.h": "c",
+        "singlelinklistbase.h": "c",
+        "linkliststatic.h": "c"
+    }
 }

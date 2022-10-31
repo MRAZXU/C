@@ -1,10 +1,8 @@
-#include <stdio.h> 
-#include <stdlib.h> 
-#include <string.h>
-#include "s.h"
+#include <SingleLinkListBase.h>
 
-//获取节点数目(包括了头结点)
-unsigned int GetListLength(link * head) 
+
+
+static unsigned int GetListLength(link * head) 
 {   
     unsigned int n= 0;   
     link * p = head;   
@@ -18,7 +16,7 @@ unsigned int GetListLength(link * head)
 }
 //单链表反转返回参数版
 //1头插法
-link * ReverseList_by_insert_head(link * head)   
+static link * ReverseList_by_insert_head(link * head)   
 {   
     link * pele = NULL;
     link * p = head->next;  
@@ -35,7 +33,7 @@ link * ReverseList_by_insert_head(link * head)
      return head;  
  }
  //2递归法
- link * ReverseList_by_recursion(link * head)   
+static link * ReverseList_by_recursion(link * head)   
 {   
     if(head == NULL || head->next == NULL)  return head;
     link * new=ReverseList_by_recursion(head->next);
@@ -53,7 +51,7 @@ link * ReverseList_by_insert_head(link * head)
  }
 
  // 获取单链表中间结点，若链表长度为n(n>0)，则返回第n/2+1个节点
-link * GetMiddleNode(link * head)   
+static link * GetMiddleNode(link * head)   
 {   
     if(head == NULL || head->next == NULL) return head; // 链表为空或只有一个节点，返回头指针  
     link * p = head;   
@@ -69,7 +67,7 @@ link * GetMiddleNode(link * head)
  }
 
  //已知两单链表各自有序，合并后依然有序---类似于归并排序
- link * MergeSortedList(link * head1, link * head2)   
+static link * MergeSortedList(link * head1, link * head2)   
 {   
     link *p1=   head1->next;
     link *p2=   head2->next;
@@ -119,7 +117,7 @@ link * GetMiddleNode(link * head)
 } 
 
 //上一道题的递归解法
-link * MergeSortedList_by_recursion(link * head1, link * head2)  
+static link * MergeSortedList_by_recursion(link * head1, link * head2)  
 {  
     //即使初始化也是边界条件
     link *p1=   head1;
@@ -128,7 +126,7 @@ link * MergeSortedList_by_recursion(link * head1, link * head2)
         return head2;   
     if(p2 == NULL)   
         return head1;
-    link * headMerged = NULL,*p=NULL;   
+    link *p=NULL;   
     if(p1->ch < p2->ch)   
     {  
          p= p1;  
@@ -141,13 +139,14 @@ link * MergeSortedList_by_recursion(link * head1, link * head2)
      }
      return p;  
  }
- int main()
+ void siglinkOptTest()
  {
     link  *apH = NULL,*aMed=NULL,*bpH = NULL,*MergepH=NULL,*rever_a=NULL;
     char a[]="12345";
     char b[]="25789";
     apH=create_link(a); 
     bpH=create_link(b); 
+
     printf("original a link is: "); 
     print_link(apH); 
     printf("a link has %d point\n",GetListLength(apH) ) ;
@@ -159,8 +158,10 @@ link * MergeSortedList_by_recursion(link * head1, link * head2)
     ReverseList_by_recursion(apH);
     print_link(apH); 
     print_link(bpH); 
+    bpH=MergeSortedList(apH,bpH);
+    apH=ReverseList_by_insert_head(apH);
     MergepH=MergeSortedList_by_recursion(apH,bpH);
     printf("ab mergeed link is: "); 
     print_link(MergepH);
-    return 0;
+    return;
 }
